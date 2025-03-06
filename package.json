@@ -19,5 +19,8 @@
   "description": "",
   "dependencies": {
     "node-fetch": "^3.3.2"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
