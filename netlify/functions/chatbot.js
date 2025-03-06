@@ -2,9 +2,8 @@ import fetch from 'node-fetch';
 
 exports.handler = async function (event) {
     try {
-        // Log incoming message
         const { message } = JSON.parse(event.body);
-        console.log("Received message:", message);
+        console.log("Received message:", message);  // Log the incoming message
 
         // Make API request to OpenAI
         const response = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -19,11 +18,19 @@ exports.handler = async function (event) {
             })
         });
 
-        // Log the response from the OpenAI API
+        // Log the status code of the response
+        console.log("OpenAI API status code:", response.status);
+
+        // Check if response is ok (status 200)
+        if (!response.ok) {
+            throw new Error(`OpenAI API responded with status ${response.status}`);
+        }
+
+        // Try to parse the JSON response
         const data = await response.json();
         console.log("OpenAI API response:", data);
 
-        // Check if response is valid
+        // Check if response data is valid
         if (!data.choices || !data.choices[0]) {
             throw new Error("No valid response from OpenAI.");
         }
@@ -34,7 +41,7 @@ exports.handler = async function (event) {
         };
 
     } catch (error) {
-        console.error("Error:", error); // Log the error
+        console.error("Error:", error);  // Log the error
         return {
             statusCode: 500,
             body: JSON.stringify({ error: "Fehler bei der AI-Antwort", message: error.message })
