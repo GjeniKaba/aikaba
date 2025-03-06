@@ -2,8 +2,11 @@ import fetch from 'node-fetch';
 
 exports.handler = async function (event) {
     try {
+        // Log incoming message
         const { message } = JSON.parse(event.body);
+        console.log("Received message:", message);
 
+        // Make API request to OpenAI
         const response = await fetch("https://api.openai.com/v1/chat/completions", {
             method: "POST",
             headers: {
@@ -16,7 +19,14 @@ exports.handler = async function (event) {
             })
         });
 
+        // Log the response from the OpenAI API
         const data = await response.json();
+        console.log("OpenAI API response:", data);
+
+        // Check if response is valid
+        if (!data.choices || !data.choices[0]) {
+            throw new Error("No valid response from OpenAI.");
+        }
 
         return {
             statusCode: 200,
@@ -24,9 +34,10 @@ exports.handler = async function (event) {
         };
 
     } catch (error) {
+        console.error("Error:", error); // Log the error
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: "Fehler bei der AI-Antwort" })
+            body: JSON.stringify({ error: "Fehler bei der AI-Antwort", message: error.message })
         };
     }
 };
