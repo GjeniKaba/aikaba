@@ -21,6 +21,7 @@
     "node": "16.x"
   },
   "dependencies": {
-    "node-fetch": "^2.6.7"
+    "node-fetch": "^2.6.7",
+    "openai": "^4.86.2"
   }
 }
