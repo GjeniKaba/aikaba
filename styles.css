@@ -1,0 +1,137 @@
+
+/* Allgemeine Stile */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Header */
+header {
+    background: linear-gradient(90deg, #6A11CB, #2575FC);
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* Hero-Section */
+.hero {
+    padding: 50px;
+    background: url('ai_background.jpg') no-repeat center center/cover;
+}
+
+.hero h2 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 20px;
+    max-width: 600px;
+    margin: auto;
+}
+
+.cta-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 15px 25px;
+    font-size: 22px;
+    color: white;
+    background: #6A11CB;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.cta-button:hover {
+    background: #2575FC;
+}
+
+/* Chat-Container */
+.chat-container {
+    max-width: 600px;
+    margin: 30px auto;
+    background: #1E1E1E;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+}
+
+#chatbox {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #444;
+    padding: 10px;
+    border-radius: 5px;
+    background: #2A2A2A;
+    color: white;
+    text-align: left;
+}
+
+/* Benutzer- und Bot-Nachrichten */
+.user-message {
+    align-self: flex-end;
+    background: #6A11CB;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+    margin: 5px;
+    text-align: right;
+}
+
+.bot-message {
+    align-self: flex-start;
+    background: #2575FC;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+    margin: 5px;
+    text-align: left;
+}
+
+/* Formular */
+input, button {
+    width: 80%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+button {
+    background: #6A11CB;
+    color: white;
+    font-size: 18px;
+}
+
+button:hover {
+    background: #2575FC;
+}
+
+/* Footer */
+footer {
+    background: #1E1E1E;
+    padding: 15px;
+    font-size: 14px;
+    margin-top: 30px;
+}

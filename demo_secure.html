@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo - AI Connect</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script>
+        async function sendMessage() {
+            let userInput = document.getElementById("userInput").value.trim();
+            if (!userInput) return;
+
+            let chatbox = document.getElementById("chatbox");
+            chatbox.innerHTML += "<div class='user-message'><strong>Sie:</strong> " + userInput + "</div>";
+            document.getElementById("userInput").value = "";
+
+            chatbox.innerHTML += "<div class='bot-message' id='loading'>Chatbot schreibt...</div>";
+            chatbox.scrollTop = chatbox.scrollHeight;
+
+            try {
+                const response = await fetch('/.netlify/functions/chatbot', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ message: userInput })
+                });
+
+                const data = await response.json();
+                document.getElementById("loading").remove();
+
+                if (data && data.response) {
+                    chatbox.innerHTML += "<div class='bot-message'><strong>Chatbot:</strong> " + data.response + "</div>";
+                } else {
+                    chatbox.innerHTML += "<div class='bot-message'><strong>Chatbot:</strong> Fehler bei der Antwort.</div>";
+                }
+                chatbox.scrollTop = chatbox.scrollHeight;
+
+            } catch (error) {
+                document.getElementById("loading").remove();
+                chatbox.innerHTML += "<div class='bot-message'><strong>Chatbot:</strong> Es gab ein Problem mit der AI-Verbindung.</div>";
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>AI-Chatbot Demo</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="funktionen.html">Funktionen</a></li>
+                <li><a href="preise.html">Preise</a></li>
+                <li><a href="demo.html">Demo</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <h2>Testen Sie den AI-Chatbot</h2>
+        <div class="chat-container">
+            <div id="chatbox">
+                <div class='bot-message'><strong>Chatbot:</strong> Hallo! Wie kann ich Ihnen helfen?</div>
+            </div>
+            <input type="text" id="userInput" placeholder="Ihre Frage eingeben...">
+            <button onclick="sendMessage()">Senden</button>
+        </div>
+    </section>
+</body>
+</html>
